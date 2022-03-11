@@ -1,0 +1,13 @@
+web scraping
+pyrebase
+spacy
+flask + react
+
+
+skills separate model
+rules based for 
+
+college/uni
+degree/diploma
+% in exams
+

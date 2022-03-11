@@ -1,0 +1,22 @@
+model7-178r-74r-en-core - 
+
+['tok2vec', 'email_phone_ner', 'ner']
+Santosh Suresh Name
+santu22@gmail.com EMAIL ADDRESS
+13 years of experience EXPERIENCE
+Team Manager Designation
+Bachelors of Commerce Degree
+Post Graduate Diploma in Business Administration Degree
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+model7-250r-54r-fact
+
+['tok2vec', 'email_phone_ner', 'ner']
+Santosh Suresh Name
+santu22@gmail.com EMAIL ADDRESS
+NAL S COLLEGE
+13 years of experience EXPERIENCE
+ Part of the Central Accounts Group team responsible for Static data maintenance and account opening for Institutional clients of the firm Designation
+Bachelors of Commerce – Bangalore University Degree
+Post Graduate Diploma in Business Administration Degree
