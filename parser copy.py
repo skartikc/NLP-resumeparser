@@ -38,88 +38,80 @@ def countDep(doc,dep,tokid,end):
                 count+=sum(1 for _ in token.children)
     return count
 
+def text_pp(text):
+    textN = text.replace("："," ").replace("\n\n\n","\n\n").replace("\n\n",". ").replace("\n",". ").replace("..",".")
+    insensitive_hippo = re.compile(re.escape('bachelors'), re.IGNORECASE)
+    textN2 = insensitive_hippo.sub('Bachelor',textN)
+    insensitive_hippo = re.compile(re.escape('msc'), re.IGNORECASE)
+    textN2 = insensitive_hippo.sub('M.Sc',textN)
+    insensitive_hippo = re.compile(re.escape('bsc'), re.IGNORECASE)
+    textN2 = insensitive_hippo.sub('B.Sc',textN)
+    text1 = textN2.replace("\n"," ").replace("$"," ").replace("\\n",' ')
+    text1 = remove_white(text1)
+    text1 = remove_emojis(text1)
+    return text1
+
 # backup regex = (\+\d{0,2}\s?)?((?=1)(1?\-?\.?\s?)|)\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}
-nlp = spacy.load("models\parser-try\model-best")
+nlp = spacy.load("en_core_web_lg")
 # nlpS = spacy.load("models\model8-s-178r-78r-en-core\model-best")
 # nlp = spacy.load("en_core_web_lg")
 
-text ="""Savita Sharma
-• Cellular Number: (+65) 83832851 • Email Address: savita_86@hotmail.com
-PROFESSIONAL WORK EXPERIENCE
-March 2010 – Present KPMG (Singapore)
-Asst Manager (Forensic Advisory)
-■ Manage a team of transaction monitoring analysts. Performed Quality
-Assurance Review to ensure high quality standard review of transactions.
-Perform AML controls and ongoing review of transactions flagged by the
-monitoring system; investigate and close out the alerts thoroughly in a timely
-manner, and ensuring significant issues identified are fully investigated and
-promptly escalated where necessary.
-■ Managed compliance team of an international private bank to perform quality
-check on annual and trigger event account reviews of customer due diligence
-files. Risk assessment of existing customers via risk assessment matrix and
-detecting gaps in the CDD files. Ensured remediation and transaction
-monitoring of selected red flags.
-■ Managed engagement in Wholesale Banking Division of a US bank for the
-quality review and remediation of KYC. Achieved full compliance status,
-meeting the bank’s new AML global policy standard. Client types varied from
-fund, foreign correspondent bank to corporate. Conducted internal training on
-compliance to ensure staff development and knowledge management.
-■ Manage engagement in a private bank, scope included performing adverse
-news screening on highlighted accounts, including the discounting of false
-positives and escalation of true matches to the bank’s AML compliance
-department. This was pursuant to the designation of tax crimes as predicate
-money laundering offences in Singapore.
-■ Reviewed and assessed the impact of FATCA on asset management by
-conducting FATCA entity impact assessment that analyses and proposes the
-likely FATCA entity classification and the obligations and impact under the
-various respective classifications.
-■ Managed an engagement in global bank in an investigation into allegations of
-irregular SIBOR and SOR rate setting activities which involved reviewing and
-analyzing communications evidence and offshore/onshore irregular trading
-activities.
-■ Forensic review into financial affairs of MNC with operations in Australia, New
-Zealand, Hong Kong, China and Singapore, and is also part of an international
-group located in the UK, Europe, Middle East and South Africa. The
-investigation involved examining a wide number of significant transactions.
-■ Performed statutory financial statement audit for listed companies.
-Responsibilities as an audit engagement member include review of internal
-control, client interview and identification of key areas of improvements, perusal
-of accounting records and assistance in preparation of financial statements.
-■ Awarded Service Excellence Awards by KPMG for outstanding performance
+text ="""RESUME
+WONG KIM FUNG, PENNY (王劍烽)
+Tel : 6335 5368
+Email : penny_and1@hotmail.com
+WORKING EXPERIENCE
+02/2017-07/2017 Financial accountant for AP & GL, Chanel Hong Kong Limited (6 months contract)
+• Handle daily accounting operations: invoices checking, payment and prepare journal.
+• Work with GL team on month-end closing (Balance sheet reconciliation & Bank Reconciliation)
+• Assist on Inter-company invoice settlement process
+
+03/2015 to 02/2017 Senior accounts clerk, Richemont Asia Pacific Limited
+11/2012 to 03/2015 Accounts clerk, Richemont Asia Pacific Limited
+• Handled daily accounting operations: invoices checking, payment and prepare journal.
+• Liaised with other departments on solving issues of AP accounting entries, payment and
+purchase order queries.
+• Reviewed Purchase Order.
+• Performed stock count with inventory team and inventory audit with auditor in HK and Macau.
+• Prepared monthly reports and schedules to the management.
+• Provided SAP training to new joiners in the Group and Masions, e.g. purchase order creation and
+vendor maintenance.
+• Assisted the SAP project team for the launch of the SAP VIM project in Shanghai.
+09/2011 to 08/2012 Accounting clerk, VF Hong Kong Limited (MNC)
+• Proceeded payment requests from brands and supporting departments
+• Prepared a JV and maintained the up-to-date AP database in SAP system
+• Liaised with internal parties for various payment requests and invoice checking
+• Answered finance-related enquiry from internal customer.
+04/2010 to 06/2011 Accounting officer, ChunWo Vegetable Company
+• Audited client testing reports and maintained master database accuracy
+• Conducted analytical reports, Powerpoint and summaries for management
+• Answered telephone enquiry and assisted in sample checking
+• Provided general clerical support to the team, e.g. filing and data entry
+08/2009 to 02/2010 Teleservices executive officer, PCCW Blackberry hotline
+• Provided Blackberry technical supports to end customers
+• Handled customer enquiries on billing issue
+• To assist customers in checking data usage data
 EDUCATION
-Association of Certified Anti-Money Laundering Specialist (ACAMS)
- Expected Completion Date : Dec 2016
-Association of Chartered Certified Accountants (ACCA)
-St. Stephen's College, Delhi
- Association of Chartered Certified Accountants graduate Jun 07 – Dec 09
-Institute of Singapore Chartered Accountants (ISCA)
- Chartered Accountant graduate Jun 07 – Dec 09
-University of London
- M.Sc in Professional Accountancy
- Expected Completion Date: Jun 2017
-Oxford Brookes University
- B.Sc (Hons) in Applied Accounting 
-Jun 07 – Dec 09
- Upper Second Class graduate
-IT/IS SKILLS
- Microsoft Office Suites (Access, Excel, Frontpage, Powerpoint and Words)
- CAAT softwares (Computer-Assisted Audit Technique softwares, e.g IDEA, Monetary Unit Sampling, etc
- ACCPAC
- Others: SPSS, MSOFT, QUICKBOOK
- e-Audit, e discovery, Sampling / fraud detection softwares
- Lexis Nexis, World Check, Cosima, Factiva
-. Bachelor of Arts in Modern Art.
-
-
-PROFESIONAL BODY MEMBERSHIP
- Association of Chartered Certified Accountants (ACCA)
- Institute of Singapore Chartered Accountants (ISCA)
- Association of Certified Anti-Money Laundering Specialist (ACAMS)
-REREFENCES
- Available upon request
-EXPECTED SALARY
- Market Rate/ per company policy (negotiable)
-"""
+09/2017- BA(Hons) Accounting, Edinburgh Napier University, Scoop City University of Hong Kong
+09/2007-07/2009 Hong Kong Community College, Hong Kong Polytechnic University
+Associate Degree - China Business
+09/1999-07/2007 Cognitio College (Kowloon)
+Form 1 – Form 7
+QUALIFICATIONS
+2007 Hong Kong Advanced Level Examinations
+2005 Hong Kong Certificate Education of Examination
+KEY EXPERIENCE
+• Strong interpersonal skills with clients, staff and management,
+• Self-driven and supportive to the work, able to work under pressure
+• Enthusiastic team player but able to work well as an individual
+• Highly motivated to learn and attention to details in the workplace
+2
+COMPUTER / TYPING SKILLS
+• MS Office (Word, Excel, Power Point)
+• SAP accounting system
+Current salary: $21000 x 13 months
+Expected salary: $23,000 per month
+Availability: Immediate"""
 
 @Language.component("email_phone_ner")
 def email_phone_ner_fact(doc):
@@ -148,6 +140,27 @@ def email_phone_ner_fact(doc):
             ents.append(span)
     doc.ents = ents
     return (doc)
+
+@Language.component("name_ner")
+def name_ner(doc):
+    idx = []
+    min = 1000000
+    for tok in doc[0:17]:
+        if tok.pos_ == "PROPN":
+            idx.append(tok.i)
+            if(tok.i<min):
+                min = tok.i
+    final = min
+    for tok in doc[min+1:min+5]:
+        if tok.pos_ == "PROPN":
+            final = final +1
+        else:
+            break
+    print("min = " + str(min))
+    print("final = " + str(final))
+    return doc
+
+
 
 @Language.component("college_ner")
 def college_ner(doc):
@@ -188,6 +201,7 @@ def college_ner(doc):
         entss.append(span)
   doc.ents = entss
   return doc
+
 
 @Language.component("degree_ner")
 def degree_ner(doc):
@@ -277,23 +291,17 @@ Language.component("degree_ner", func=degree_ner)
 nlp.add_pipe("degree_ner", before="ner")
 Language.component("college_ner", func=college_ner)
 nlp.add_pipe("college_ner", before="ner")
+Language.component("name_ner", func=name_ner)
+nlp.add_pipe("name_ner", before="email_phone_ner")
 
 print(nlp.pipe_names)
 
-textN = text.replace("："," ").replace("\n\n\n","\n\n").replace("\n\n",". ").replace("\n",". ").replace("..",".")
-insensitive_hippo = re.compile(re.escape('bachelors'), re.IGNORECASE)
-textN2 = insensitive_hippo.sub('Bachelor',textN)
-insensitive_hippo = re.compile(re.escape('msc'), re.IGNORECASE)
-textN2 = insensitive_hippo.sub('M.Sc',textN)
-insensitive_hippo = re.compile(re.escape('bsc'), re.IGNORECASE)
-textN2 = insensitive_hippo.sub('B.Sc',textN)
-text1 = textN2.replace("\n"," ").replace("$"," ").replace("\\n",' ')
-text1 = remove_white(text1)
-text1 = remove_emojis(text1)
-doc = nlp(text1)
-for ent in doc.ents:
-    print(ent.text,ent.label_)
-# spacy.displacy.serve(doc1, style="dep")
+doc = nlp(text_pp(text))
+# print(doc.text)
+# for ent in doc.ents:
+#     print(ent.text,ent.label_)
+for tok in doc:
+    print(tok.text + tok.pos_)
 # doc1 = nlp(text1.lower())
 # for ent in doc1.ents:
 #     print(ent.text,ent.label_)

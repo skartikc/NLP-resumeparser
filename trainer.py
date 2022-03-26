@@ -3,7 +3,7 @@ import spacy
 from tqdm import tqdm
 from spacy.tokens import DocBin
 
-with open('dataset/json/test/train_dev.json') as fp:
+with open('dataset/json/test/train_tra.json') as fp:
   TRAIN_DATA= json.load(fp)
 
 nlp = spacy.blank('en')
@@ -30,7 +30,7 @@ for text, annot in tqdm(TRAIN_DATA['annotations']):
   doc.ents = ents
   db.add(doc)
 
-db.to_disk("train_dev.spacy")
+db.to_disk("train_tra.spacy")
     
 
              
